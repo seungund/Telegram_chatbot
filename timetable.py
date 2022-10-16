@@ -15,8 +15,6 @@ time = input('오늘의 날짜를 입력하세요(YYYYMMDD):')
 
 Gcodeurl = 'https://open.neis.go.kr/hub/schoolInfo?KEY=b0a0e01a8df841228238bcbfc7aa7013&Type=json&pidex=1&pSize=10'+'&SCHUL_NM={}'.format(name)
 Gcode = requests.get(Gcodeurl).json()
-#Gcode = BeautifulSoup(Gcode.content, "html.parser")
-#필요한 인자 : SCHUL_NM, SD_SCHUL_CODE
 code = Gcode['schoolInfo'][1]['row'][0]['SD_SCHUL_CODE']
 scode = Gcode['schoolInfo'][1]['row'][0]['ATPT_OFCDC_SC_CODE']
 
@@ -27,15 +25,17 @@ if sch == '고등학교':
     H_timetable = requests.get(Hurl).json()
     table = H_timetable['hisTimetable'][1]['row']
     tablestr = str(table)
-    tablestr = tablestr.find("'PERIO': '7'")
 
-    if tablestr == -1:
+    if "'PERIO': '6'" in tablestr and "'PERIO': '7'" not in tablestr :
         for i in range(6):
             print(table[i]['ITRT_CNTNT'])
         
-    else:
+    elif "'PERIO': '7'" in tablestr :
         for i in range(7):
             print(table[i]['ITRT_CNTNT'])
+    
+    else :
+        print("ERROR")        
             
 
 
@@ -87,5 +87,3 @@ elif sch == '초등학교' :
                  
     else:
         print("ERROR")
-                    
-            
