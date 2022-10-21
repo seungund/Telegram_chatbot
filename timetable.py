@@ -87,3 +87,6 @@ elif sch == '초등학교' :
                  
     else:
         print("ERROR")
+
+
+        #세징야 화이팅
