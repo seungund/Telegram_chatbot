@@ -27,3 +27,4 @@ while True:
 
     else:
         print("숫자로 다시입력해주세요")
+        #dfsd fsd
