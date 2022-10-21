@@ -90,3 +90,4 @@ elif sch == '초등학교' :
 
 
         #세징야 화이팅
+        #같은 폴더의 checkout_command.md 파일에서 주의사항 읽기
