@@ -49,7 +49,7 @@ updater.dispatcher.add_handler(CallbackQueryHandler(callback_get))
 dispatcher.add_handler(echo_handler)
 
 
-
+#ㄲㅂㅇ
 
 
 
