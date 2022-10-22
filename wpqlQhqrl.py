@@ -2,10 +2,13 @@ import random
 import re
 
 #숫자인지 문자인지 구별
+
+
 while True:
     range = input("몇명인가요? ")
 
-    if re.match("/d",range) and not re.match('[A-Z]'):
+    if re.match("\d",range):
+        range=int(range)
         winner = random.randint(1,range)
         count = []
         #제비뽑기 진행
@@ -27,4 +30,3 @@ while True:
 
     else:
         print("숫자로 다시입력해주세요")
-        #dfsd fsd
