@@ -7,7 +7,7 @@ while True:
 
     if re.match("\d",range):
         range=int(range)
-        winner = random.randint(1,range+1)
+        winner = random.randint(1,range)
         count = []
         #제비뽑기 진행
         while True:
