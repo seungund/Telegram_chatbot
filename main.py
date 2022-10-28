@@ -35,7 +35,7 @@ def get_school_level(update, context):
     show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list))) # make markup build_menu(리스트, 1줄에 표시할 리스트 수)
     bot.sendMessage(chat_id=id, text="학교 급을 선택해주세요", reply_markup = show_markup) #https://blog.psangwoo.com/coding/2018/08/20/python-telegram-bot-4.html
     
-#  
+#Callback 함수
 def callback_get(update, context):
     query = update.callback_query
     data = query.data
