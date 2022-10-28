@@ -26,6 +26,7 @@ def build_menu(buttons, n_cols, header_buttons=None, footer_buttons=None):
     if footer_buttons:
         menu.append(footer_buttons)
     return menu
+#메뉴 함수
 def get_school_level(update, context):
     show_list = []
     show_list.append(InlineKeyboardButton("초등학교", callback_data="초등학교")) # add on button
@@ -33,6 +34,8 @@ def get_school_level(update, context):
     show_list.append(InlineKeyboardButton("고등학교", callback_data="고등학교")) # add cancel button
     show_markup = InlineKeyboardMarkup(build_menu(show_list, len(show_list))) # make markup build_menu(리스트, 1줄에 표시할 리스트 수)
     bot.sendMessage(chat_id=id, text="학교 급을 선택해주세요", reply_markup = show_markup) #https://blog.psangwoo.com/coding/2018/08/20/python-telegram-bot-4.html
+    
+#  
 def callback_get(update, context):
     query = update.callback_query
     data = query.data
