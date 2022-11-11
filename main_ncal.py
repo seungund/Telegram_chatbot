@@ -23,3 +23,4 @@ def ncal(update, context):
     if (cost % people) != 0:
         bot.sendMessage(chat_id=id, text=f"남은 금액은 가위바위보를 통해 당첨자가 {cost % people}원을 지불할시면 됩니다.")
 updater.dispatcher.add_handler(CommandHandler('ncal', ncal))
+
