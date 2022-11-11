@@ -32,9 +32,9 @@ def school_meal(update, context):
     school_level = context.args[0]
     school_name = context.args[1]
     
-    path_e = 'E.json' 
-    path_m = 'M.json'
-    path_h = 'H.json' 
+    path_e = 'Cafeteria\E.json' 
+    path_m = 'Cafeteria\M.json'
+    path_h = 'Cafeteria\H.json'
 
     pn = school_level
 
@@ -99,27 +99,27 @@ def school_meal(update, context):
     elem = result.find_all("td")
 
 
-    #0 ~ 6 요일, 5=토, 6=일, 0=월
+    #0 ~ 6 요일, 6=토, 7=일, 1=월
 
 
 
-    if d == 0:
-        dtd = 8
+    if d == 1:
+        dtd = 7
         elem1 = elem[int(dtd)]
-    elif d == 1:
-        dtd = 9
-        elem1 = elem[int(dtd)] 
     elif d == 2:
-        dtd = 10
-        elem1 = elem[int(dtd)]
+        dtd = 8
+        elem1 = elem[int(dtd)] 
     elif d == 3:
-        dtd = 11
+        dtd = 9
         elem1 = elem[int(dtd)]
     elif d == 4:
-        dtd= 12
+        dtd = 10
         elem1 = elem[int(dtd)]
-    elif d == 5 or d == 6:
-        dtd = 13
+    elif d == 5:
+        dtd= 11
+        elem1 = elem[int(dtd)]
+    elif d == 6 or d == 7:
+        dtd = 12
 
         
     r = "\(.*\)|\s-\s.*" 
