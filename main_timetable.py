@@ -105,11 +105,14 @@ def timetable(update, context):
 
 
 def play(sch, name, grade, clss):
-    sch= sch
-    name= name
-    grade= grade
-    clss= clss
 
+    sch= str(sch)
+    name= str(name)
+    grade= str(grade)
+    clss= str(clss)
+
+    grade = grade.replace('학년','')
+    clss= clss.replace('반','')
 
 
     time = str(datetime.date.today())
@@ -129,14 +132,14 @@ def play(sch, name, grade, clss):
 
         if "'PERIO': '6'" in tablestr and "'PERIO': '7'" not in tablestr :
             for i in range(6):
-                print(table[i]['ITRT_CNTNT'])
+                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
+
             
         elif "'PERIO': '7'" in tablestr :
             for i in range(7):
-                print(table[i]['ITRT_CNTNT'])
-        
+                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
         else :
-            print("ERROR")        
+            bot.sendMessage(chat_id=id, text="주말 또는 공휴일입니다.")        
                 
 
 
@@ -150,18 +153,18 @@ def play(sch, name, grade, clss):
         
         if "'PERIO': '7'" in tablestr :
             for i in range(7):
-                print(table[i]['ITRT_CNTNT'])
+                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
         
         elif "'PERIO': '6'" in tablestr and "'PERIO': '7'" not in tablestr :
             for i in range(6):
-                print(table[i]['ITRT_CNTNT'])
+                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
                 
         elif "'PERIO': '6'" not in tablestr and "'PERIO': '7'" not in tablestr and "'PERIO': '5'" in tablestr :
             for i in range(5):
-                print(table[i]['ITRT_CNTNT'])
+                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
         
         else:
-            print("ERROR")        
+            bot.sendMessage(chat_id=id, text="주말 또는 공휴일입니다.")          
                     
     elif sch == '초등학교' :
         Eurl = 'https://open.neis.go.kr/hub/elsTimetable?KEY=b0a0e01a8df841228238bcbfc7aa7013&Type=json&pidex=1&pSize=10'\
@@ -172,22 +175,22 @@ def play(sch, name, grade, clss):
         
         if "'PERIO': '7'" in tablestr :
             for i in range(7):
-                print(table[i]['ITRT_CNTNT'])
+                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
         
         elif "'PERIO': '6'" in tablestr and "'PERIO': '7'" not in tablestr :
             for i in range(6):
-                print(table[i]['ITRT_CNTNT'])
+                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
                 
         elif "'PERIO': '6'" not in tablestr and "'PERIO': '7'" not in tablestr and "'PERIO': '5'" in tablestr :
             for i in range(5):
-                print(table[i]['ITRT_CNTNT'])
+                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
                 
         elif "'PERIO': '6'" not in tablestr and "'PERIO': '7'" not in tablestr and "'PERIO': '5'" not in tablestr and "'PERIO': '4'" in tablestr :
             for i in range(4):
-                print(table[i]['ITRT_CNTNT'])
+                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
                     
         else:
-            print("ERROR")
+            bot.sendMessage(chat_id=id, text="주말 또는 공휴일입니다.")  
         
         
 
