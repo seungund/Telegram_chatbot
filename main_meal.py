@@ -4,8 +4,9 @@ import json
 import datetime
 import re
 import telegram
-from telegram.ext import Updater
-from telegram.ext import MessageHandler, Filters, CommandHandler
+from telegram import * 
+from telegram.ext import *
+
 
 #텔레그램
 #(현재)
@@ -27,18 +28,45 @@ bot.sendMessage(chat_id=id, text="나는 대화챗봇입니다.")
 updater = Updater(token=my_token, use_context=True)
 dispatcher = updater.dispatcher
 updater.start_polling()
+school_meal = range(1)
+
+
+def meal(update, context):
+    bot.sendMessage(chat_id=id, text="학교 이름을 입력해주세요.")
+    return school_meal
+
+def cancel(update, context):
+    bot.sendMessage(chat_id=id, text="시간표 명령어 종료")
+    return ConversationHandler.END 
+
+
 
 def school_meal(update, context):
-    school_level = context.args[0]
-    school_name = context.args[1]
+    name = update.message.text
+    if name[-1] == "고":
+        sch = "고등학교"
+    elif name[-1] == "중":
+        sch = "중학교"
+    elif name[-1] == "초":
+        sch = "초등학교" 
+    elif name[-4] == "고": 
+        sch = "고등학교"
+    elif name[-4] == "중":
+        sch = "중학교"
+    elif name[-4] == "초":
+        sch = "초등학교"
+    else:
+        bot.sendMessage(chat_id=id, text=f"ERROR, 명령어 실행이 종료됩니다.") 
+        return ConversationHandler.END
+
     
     path_e = 'Cafeteria\E.json' 
     path_m = 'Cafeteria\M.json'
     path_h = 'Cafeteria\H.json'
 
-    pn = school_level
+    pn = str(sch)
 
-    pcode = school_name
+    pcode = str(name)
 
     dt = str(datetime.date.today())
     dt_a = dt.replace('-','')
@@ -140,4 +168,10 @@ def school_meal(update, context):
 
     elif dtd == 12:
         bot.sendMessage(chat_id = id, text="오늘은 주말/공휴일 입니다.")
-updater.dispatcher.add_handler(CommandHandler('meal', school_meal))
+updater.dispatcher.add_handler(ConversationHandler(
+    entry_points=[CommandHandler("meal", meal)],
+    states={
+        school_meal : [MessageHandler(filters=~Filters.command, callback= school_meal)]
+    },
+    fallbacks=[CommandHandler("cancel", cancel)]
+))
