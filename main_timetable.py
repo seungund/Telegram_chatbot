@@ -203,3 +203,4 @@ def play(sch, name, grade, clss):
 updater.dispatcher.add_handler(CommandHandler('tt', timetable))
 
 updater.dispatcher.add_handler(CallbackQueryHandler(callback_get))
+
