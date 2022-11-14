@@ -1,7 +1,6 @@
 import telegram
-from telegram import ChatAction
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import MessageHandler, Filters, CommandHandler, Updater, CallbackQueryHandler
+from telegram import *
+from telegram.ext import *
 my_token = "5336689796:AAGL3VEA1xM9dDodIbDxDNvv6Fv-VirCQoA"
 bot = telegram.Bot(token=my_token)
 id = 5775004281
@@ -57,11 +56,51 @@ def callback_get(update, context):
         , message_id=query.message.message_id
     )
     get_school_name(update, context)
-    
+
+
+
+
+#Now i can reply
+school_name = range(1)
+
+def tt(update, context):
+    bot.sendMessage(chat_id=id, text="학교 이름을 입력해주세요") 
+    return school_name
+
+def name(update, context):
+    name = update.message.text
+    if name[-1] == "고":
+        bot.sendMessage(chat_id=id, text=f"당신의 고등학교 이름은 {name}입니다. ") 
+    elif name[-1] == "중":
+        bot.sendMessage(chat_id=id, text=f"당신의 중학교 이름은 {name}입니다. ") 
+    elif name[-1] == "초":
+        bot.sendMessage(chat_id=id, text=f"당신의 초등학교 이름은 {name}입니다. ") 
+    elif name[-4] == "고":
+        bot.sendMessage(chat_id=id, text=f"당신의 고등학교 이름은 {name}입니다. ") 
+    elif name[-4] == "중":
+        bot.sendMessage(chat_id=id, text=f"당신의 중학교 이름은 {name}입니다. ") 
+    elif name[-4] == "초":
+        bot.sendMessage(chat_id=id, text=f"당신의 초등학교 이름은 {name}입니다. ") 
+    else:
+        bot.sendMessage(chat_id=id, text=f"ERROR") 
+    return ConversationHandler.END
+def cancel(update, context):
+    bot.sendMessage(chat_id=id, text="시간표 명령어 종료")
+    return ConversationHandler.END 
+
 echo_handler = MessageHandler(Filters.text, echo)
 updater.dispatcher.add_handler(CommandHandler('ncal', ncal))
 
 updater.dispatcher.add_handler(CommandHandler('meal', get_school_level))
 updater.dispatcher.add_handler(CallbackQueryHandler(callback_get))
+
+updater.dispatcher.add_handler(ConversationHandler(
+    entry_points=[CommandHandler("tt", tt)],
+    states={
+        school_name : [MessageHandler(filters=~Filters.command, callback= name)]
+    },
+    fallbacks=[CommandHandler("cancel", cancel)]
+))
+
 
 dispatcher.add_handler(echo_handler)
