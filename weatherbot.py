@@ -1,16 +1,18 @@
-import requests
-from bs4 import BeautifulSoup
-import json
 import datetime
+import json
 import re
-import telegram
-from telegram.ext import Updater
-from telegram.ext import MessageHandler, Filters, CommandHandler
+
 import googletrans
+import requests
+import telegram
+from bs4 import BeautifulSoup
+from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
+
 #wufQpwOk9N7wGx3WAooWB8wdRtYVMduOSAkTVMLfegxIsHrwBBscP3MznOEbTkLOp%2FAEo9iqiX1edIvrVuUSwQ%3D%3D
 
 #시간
 date = str(datetime.date.today())
+whole_date = date
 date = date.replace('-','')
 
 #------------#
@@ -26,7 +28,7 @@ Y= data["Y"]
 code='wufQpwOk9N7wGx3WAooWB8wdRtYVMduOSAkTVMLfegxIsHrwBBscP3MznOEbTkLOp%2FAEo9iqiX1edIvrVuUSwQ%3D%3D'
 url = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey={}&pageNo=1&numOfRows=1000&dataType=JSON&base_date={}&base_time=0500&nx={}&ny={}'\
     .format(code,date,X,Y)
-
+    
 
 weather = requests.get(url,verify=False).json()
 
@@ -37,29 +39,34 @@ wew_time = int('5')
 wer_li = dict()
 wew_li = dict()
 data = weather["response"]["body"]["items"]["item"]
+
 for i in data:
     if(i["category"]) == "PTY" and (i["fcstDate"]) == date:
         wea = (i["fcstValue"]+'s')
        
         wer_time = wer_time+1
         wer_li[str(wer_time)] = wea
+        
+        
 for i in data:    
     if(i["category"]) == "SKY" and (i["fcstDate"]) == date:
         wea = (i["fcstValue"])
         
         wew_time = wew_time+1
         wew_li[str(wew_time)] = wea
-            
         
 
 time = int('6')
 
-for i in range(1,19):
-    if wer_li['{}'.format(time)] == '0s':
+for ii in range(1,19):
+    if wer_li['{}'.format(time)] == "0s" :
         a = wew_li['{}'.format(time)]
         wer_li['{}'.format(time)] = '{}'.format(a+'s')
-        time = time  + 1
+    time = time  + 1
+    continue   
 
+        
+        
 
 #####
 # 1s : 맑음 3s : 구름 많음 4s : 흐림,, 1 : 비 2: 비/눈 3: 눈 4 : 소나기 #
@@ -93,5 +100,5 @@ final = final.replace('1n','비')
 final = final.replace('2n','진눈깨비')
 final = final.replace('3n','눈')
 final = final.replace('4n','소나기')
-final = '   <금일의 날씨>\n' + final
+final = '<금일({})의 날씨>\n'.format(whole_date) + final
 print(final)
