@@ -100,7 +100,7 @@ def name(update, context):
          
         sch = "고등학교"
         
-    elif name[-4] == "중":
+    elif name[-3] == "중":
          
         sch = "중학교"
         
