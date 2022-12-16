@@ -36,7 +36,7 @@ def meal(update, context):
     return school_meal
 
 def cancel(update, context):
-    bot.sendMessage(chat_id=id, text="시간표 명령어 종료")
+    bot.sendMessage(chat_id=id, text="급식 명령어 종료")
     return ConversationHandler.END 
 
 
