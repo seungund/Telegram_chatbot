@@ -1,12 +1,9 @@
 import datetime
 import json
 import re
-
-import googletrans
 import requests
-import telegram
 from bs4 import BeautifulSoup
-from telegram.ext import CommandHandler, Filters, MessageHandler, Updater
+
 
 #wufQpwOk9N7wGx3WAooWB8wdRtYVMduOSAkTVMLfegxIsHrwBBscP3MznOEbTkLOp%2FAEo9iqiX1edIvrVuUSwQ%3D%3D
 
@@ -17,7 +14,7 @@ date = date.replace('-','')
 
 #------------#
 
-path = 'Weather\XYstore.json'
+path = './XYstore.json'
 
 with open(path, 'r') as f:
     data = json.load(f)
@@ -93,7 +90,9 @@ final = "6시 :{} / {}℃\n7시 :{} / {}℃\n8시 :{} / {}℃\n9시 :{} / {}℃\
 ,wer_li['14'],temp_li['14'],wer_li['15'],temp_li['15'],wer_li['16'],temp_li['16'],wer_li['17'],temp_li['17'],wer_li['18'],temp_li['18'],wer_li['19'],temp_li['19']\
 ,wer_li['20'],temp_li['20'],wer_li['21'],temp_li['21'],wer_li['22'],temp_li['22'],wer_li['23'],temp_li['23'])
 
-final = final.replace('1s','맑음')
+
+
+final = final.replace('1s','맑음 ')
 final = final.replace('3s','구름 약간')
 final = final.replace('4s','흐림')
 final = final.replace('1n','비')
