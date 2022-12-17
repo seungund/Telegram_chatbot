@@ -60,9 +60,15 @@ def school_meal(update, context):
         return ConversationHandler.END
 
     
+<<<<<<< HEAD
     path_e = 'Cafeteria\E.json' 
     path_m = 'Cafeteria\M.json'
     path_h = 'Cafeteria\H.json'
+=======
+    path_e = 'E.json' 
+    path_m = 'M.json'
+    path_h = 'H.json'
+>>>>>>> lee
 
     pn = str(sch)
 

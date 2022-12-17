@@ -100,7 +100,11 @@ def name(update, context):
          
         sch = "고등학교"
         
+<<<<<<< HEAD
     elif name[-4] == "중":
+=======
+    elif name[-3] == "중":
+>>>>>>> lee
          
         sch = "중학교"
         
@@ -228,4 +232,7 @@ updater.dispatcher.add_handler(ConversationHandler(
     fallbacks=[CommandHandler("cancel", cancel)]
 ))
 updater.dispatcher.add_handler(CallbackQueryHandler(callback_get))
+<<<<<<< HEAD
 
+=======
+>>>>>>> lee
