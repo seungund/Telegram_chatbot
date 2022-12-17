@@ -63,6 +63,7 @@ def weather(update, context):
             wew_li[str(wew_time)] = wea
             
 
+    
     time = int('6')
 
     for ii in range(1,19):
