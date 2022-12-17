@@ -24,7 +24,7 @@ def weather(update, context):
 
     #------------#
 
-    path = './XYstore.json'
+    path = './Weather/XYstore.json'
 
     with open(path, 'r') as f:
         data = json.load(f)
