@@ -5,6 +5,12 @@ import requests
 from bs4 import BeautifulSoup
 
 
+#######################################################################
+import telegram as tel
+bot = tel.Bot(token="5759838781:AAGWmVF7tWC1C4jwDMVdYfkBZC4SVghMqSQ")
+chat_id = 5589523389
+########################################################################
+
 #wufQpwOk9N7wGx3WAooWB8wdRtYVMduOSAkTVMLfegxIsHrwBBscP3MznOEbTkLOp%2FAEo9iqiX1edIvrVuUSwQ%3D%3D
 
 #시간
@@ -25,7 +31,7 @@ Y= data["Y"]
 code='wufQpwOk9N7wGx3WAooWB8wdRtYVMduOSAkTVMLfegxIsHrwBBscP3MznOEbTkLOp%2FAEo9iqiX1edIvrVuUSwQ%3D%3D'
 url = 'https://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst?serviceKey={}&pageNo=1&numOfRows=1000&dataType=JSON&base_date={}&base_time=0500&nx={}&ny={}'\
     .format(code,date,X,Y)
-    
+
 
 weather = requests.get(url,verify=False).json()
 
@@ -58,7 +64,8 @@ time = int('6')
 for ii in range(1,19):
     if wer_li['{}'.format(time)] == "0s" :
         a = wew_li['{}'.format(time)]
-        wer_li['{}'.format(time)] = '{}'.format(a+'s')
+        wer_li['{}'.format(time)] = '{}'.format(a+'n')
+        
     time = time  + 1
     continue   
 
@@ -78,18 +85,26 @@ for i in data:
         tmp = (i["fcstValue"])
         tmp_time = tmp_time+1
         temp_li[str(tmp_time)] = tmp
-        
 
+
+temp_di=list(temp_li.values())
+temp_di = list(map(int, temp_di))
+
+H = max(temp_di)
+L = min(temp_di)
+
+    
 
 #-----------------------------------------------------------#
 
 
-final = "6시 :{} / {}℃\n7시 :{} / {}℃\n8시 :{} / {}℃\n9시 :{} / {}℃\n10시 :{} / {}℃\n11시 :{} / {}℃\n12시 :{} / {}℃\n13시 :{} / {}℃\n14시 :{} / {}℃\n15시 :{} / {}℃\n16시 :{} / {}℃\n17시 :{} / {}℃\n\
+'''final = "6시 :{} / {}℃\n7시 :{} / {}℃\n8시 :{} / {}℃\n9시 :{} / {}℃\n10시 :{} / {}℃\n11시 :{} / {}℃\n12시 :{} / {}℃\n13시 :{} / {}℃\n14시 :{} / {}℃\n15시 :{} / {}℃\n16시 :{} / {}℃\n17시 :{} / {}℃\n\
 18시 :{} / {}℃\n19시 :{} / {}℃\n20시 :{} / {}℃\n21시 :{} / {}℃\n22시 :{} / {}℃\n23시 :{} / {}℃".format(wer_li['6'],temp_li['6'],wer_li['7'],temp_li['7'],wer_li['8'],temp_li['8']\
 ,wer_li['9'],temp_li['9'],wer_li['10'],temp_li['10'],wer_li['11'],temp_li['11'],wer_li['12'],temp_li['12'],wer_li['13'],temp_li['13']\
 ,wer_li['14'],temp_li['14'],wer_li['15'],temp_li['15'],wer_li['16'],temp_li['16'],wer_li['17'],temp_li['17'],wer_li['18'],temp_li['18'],wer_li['19'],temp_li['19']\
-,wer_li['20'],temp_li['20'],wer_li['21'],temp_li['21'],wer_li['22'],temp_li['22'],wer_li['23'],temp_li['23'])
+,wer_li['20'],temp_li['20'],wer_li['21'],temp_li['21'],wer_li['22'],temp_li['22'],wer_li['23'],temp_li['23'])'''
 
+<<<<<<< HEAD
 
 
 final = final.replace('1s','맑음 ')
@@ -99,5 +114,38 @@ final = final.replace('1n','비')
 final = final.replace('2n','진눈깨비')
 final = final.replace('3n','눈')
 final = final.replace('4n','소나기')
+=======
+'''final = final.replace('1n','맑음')
+final = final.replace('3n','구름 약간')
+final = final.replace('4n','흐림')
+final = final.replace('1s','비')
+final = final.replace('2s','진눈깨비')
+final = final.replace('3s','눈')
+final = final.replace('4s','소나기')
+>>>>>>> 820f5600330976873dca471facb66e84ac2a9e52
 final = '<금일({})의 날씨>\n'.format(whole_date) + final
-print(final)
+print(final)'''
+
+final = "6시  :{} / {}℃\n9시  :{} / {}℃\n12시 :{} / {}℃\n15시 :{} / {}℃\n\
+18시 :{} / {}℃\n21시 :{} / {}℃".format(wer_li['6'],temp_li['6']
+,wer_li['9'],temp_li['9'],wer_li['12'],temp_li['12']
+,wer_li['15'],temp_li['15'],wer_li['18'],temp_li['18']\
+,wer_li['21'],temp_li['21'])
+
+final = final.replace('1n','🌞')
+final = final.replace('3n','⛅')
+final = final.replace('4n','☁')
+final = final.replace('1s','🌧')
+final = final.replace('2s','🌨')
+final = final.replace('3s','☃')
+final = final.replace('4s','🌩')
+F = ('<금일({})의 날씨>'.format(whole_date))
+G = ('최고기온 : {0}℃\n최저기온 : {1}℃'.format(H,L))
+
+bot.sendMessage(chat_id=chat_id, text=F)
+bot.sendMessage(chat_id=chat_id, text=G)
+bot.sendMessage(chat_id=chat_id, text='--------------')
+bot.sendMessage(chat_id=chat_id, text=final)
+bot.sendMessage(chat_id=chat_id, text='made by 이승언')
+
+
