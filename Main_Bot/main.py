@@ -10,9 +10,9 @@ import datetime
 import re
 
 #기본값
-my_token = "5336689796:AAGL3VEA1xM9dDodIbDxDNvv6Fv-VirCQoA"
+my_token = "5759838781:AAGWmVF7tWC1C4jwDMVdYfkBZC4SVghMqSQ"
 bot = telegram.Bot(token=my_token)
-id = 5775004281
+id = 5589523389
 bot.sendMessage(chat_id=id, text="나는 대화챗봇입니다.")
 updater = Updater(token=my_token, use_context=True)
 dispatcher = updater.dispatcher
