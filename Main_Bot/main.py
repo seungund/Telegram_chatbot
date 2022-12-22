@@ -91,6 +91,7 @@ def judge(update, context):
     global money
     global data
     if choice == win:
+        money -= r_money
         r_money *= 2
         money += r_money
         bot.sendMessage(chat_id=id, text="축하합니다! 2배 획득!!")
@@ -307,6 +308,7 @@ def callback_get(update, context) :
                                       )
         send = data_selected.split(",")
         play(sch, name, send[0], send[1])
+        return ConversationHandler.END
 
 def timetable(update, context):
      bot.sendMessage(chat_id=id, text="학교 이름을 입력해주세요") 
@@ -376,13 +378,12 @@ def play(sch, name, grade, clss):
         if "'PERIO': '6'" in tablestr and "'PERIO': '7'" not in tablestr :
             for i in range(6):
                 bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
-
             
         elif "'PERIO': '7'" in tablestr :
             for i in range(7):
                 bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
         else :
-            bot.sendMessage(chat_id=id, text="주말 또는 공휴일입니다.")        
+            bot.sendMessage(chat_id=id, text="주말 또는 공휴일입니다.")     
                 
 
 
@@ -396,7 +397,7 @@ def play(sch, name, grade, clss):
         
         if "'PERIO': '7'" in tablestr :
             for i in range(7):
-                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
+                bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])     
         
         elif "'PERIO': '6'" in tablestr and "'PERIO': '7'" not in tablestr :
             for i in range(6):
@@ -407,7 +408,7 @@ def play(sch, name, grade, clss):
                 bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
         
         else:
-            bot.sendMessage(chat_id=id, text="주말 또는 공휴일입니다.")          
+            bot.sendMessage(chat_id=id, text="주말 또는 공휴일입니다.")      
                     
     elif sch == '초등학교' :
         Eurl = 'https://open.neis.go.kr/hub/elsTimetable?KEY=b0a0e01a8df841228238bcbfc7aa7013&Type=json&pidex=1&pSize=10'\
@@ -419,21 +420,26 @@ def play(sch, name, grade, clss):
         if "'PERIO': '7'" in tablestr :
             for i in range(7):
                 bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
-        
+            return ConversationHandler.END 
+                
         elif "'PERIO': '6'" in tablestr and "'PERIO': '7'" not in tablestr :
             for i in range(6):
                 bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
+            return ConversationHandler.END 
                 
         elif "'PERIO': '6'" not in tablestr and "'PERIO': '7'" not in tablestr and "'PERIO': '5'" in tablestr :
             for i in range(5):
                 bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
+            return ConversationHandler.END 
                 
         elif "'PERIO': '6'" not in tablestr and "'PERIO': '7'" not in tablestr and "'PERIO': '5'" not in tablestr and "'PERIO': '4'" in tablestr :
             for i in range(4):
                 bot.sendMessage(chat_id=id, text=table[i]['ITRT_CNTNT'])
+            return ConversationHandler.END 
                     
         else:
-            bot.sendMessage(chat_id=id, text="주말 또는 공휴일입니다.")  
+            bot.sendMessage(chat_id=id, text="주말 또는 공휴일입니다.")
+            return ConversationHandler.END   
 #함수 - 날씨
 
 def weather(update, context):
