@@ -26,7 +26,7 @@ gif = "https://media.giphy.com/media/3o6MbqNPaatT8nnEmk/giphy.gif"
 #변수 선언 - 카지노
 result, dcasino_start, road_path, door_path, ret= range(5)
 global money
-money = 10000
+money = 5000
 #변수 선언 - 급식
 school_meal = range(1)
 #변수 선언 - n빵
@@ -41,13 +41,13 @@ def casino(update, context):
     bot.sendMessage(chat_id=id, text="배팅게임에 오신 것을 환영합니다.")
     bot.sendMessage(chat_id=id, text="한 레벨을 통과하실 때마다 배팅 금액의 2배를 상금으로 받으실 수 있습니다.")
     bot.sendMessage(chat_id=id, text="레벨 통과에 실패하시면 모든 배팅 금액을 잃게 됩니다.")
-    bot.sendMessage(chat_id=id, text="배팅 금액을 입력하세요. (기본 금액 : 10000원)")
+    bot.sendMessage(chat_id=id, text="배팅 금액을 입력하세요. (기본 금액 : 5000원)")
     return dcasino_start
 
 def casino_start(update, context):
     global r_money
     r_money = update.message.text
-    if money > 10000:
+    if money > 5000:
         bot.sendMessage(chat_id=id, text="사기를 치다니! 거래가 종료됩니다.")
         return ConversationHandler.END
     bot.sendMessage(chat_id=id, text=f"총 {r_money}원 배팅하셨습니다. ")
@@ -101,7 +101,7 @@ def judge(update, context):
         money -= r_money
         bot.sendMessage(chat_id=id, text="아쉽네요. 모든 배팅 금액을 잃었습니다.")
         bot.sendMessage(chat_id=id, text=f"최종 금액은 {money}원 입니다.")
-        money = 10000
+        money = 5000
         return ConversationHandler.END  
 
 def retry(update, context):
@@ -530,10 +530,10 @@ def weather(update, context):
     temp_sum = 0
     for i in range(6, 24):
         temp_sum += int(temp_li[f'{i}'])
-    if temp_sum / 18 + 24 <= 0:
+    if temp_sum / 18<= 0:
         bot.sendMessage(chat_id=id, text=final)
         bot.sendMessage(chat_id=id, text="🥶")
-    elif temp_sum / 18 + 1000>= 24:
+    elif temp_sum / 18>= 24:
         bot.sendMessage(chat_id=id, text=final)
         bot.sendMessage(chat_id=id, text="🫠")
     else:
@@ -546,7 +546,7 @@ def weather(update, context):
 
 
 
-#텔레그램 Handler -카지노
+#텔레그램 Handler -카지노 /dop
 updater.dispatcher.add_handler(ConversationHandler(
     entry_points=[CommandHandler("dop", casino)],
     states={
@@ -558,7 +558,7 @@ updater.dispatcher.add_handler(ConversationHandler(
     },
     fallbacks=[CommandHandler("cancel", cancel_cas)]
 ))
-#텔레그램 Handler -급식
+#텔레그램 Handler -급식 /meal
 updater.dispatcher.add_handler(ConversationHandler(
     entry_points=[CommandHandler("meal", meal)],
     states={
@@ -566,7 +566,7 @@ updater.dispatcher.add_handler(ConversationHandler(
     },
     fallbacks=[CommandHandler("cancel", cancel_meal)]
 ))
-#텔레그램 Handler -n빵
+#텔레그램 Handler -n빵 /ncal
 updater.dispatcher.add_handler(ConversationHandler(
     entry_points=[CommandHandler("ncal", ncal)],
     states={
@@ -575,7 +575,7 @@ updater.dispatcher.add_handler(ConversationHandler(
     },
     fallbacks=[CommandHandler("cancel", cancel_ncal)]
 ))
-#텔레그램 Handler - 시간표
+#텔레그램 Handler - 시간표 /tt
 updater.dispatcher.add_handler(ConversationHandler(
     entry_points=[CommandHandler("tt", timetable)],
     states={
@@ -584,6 +584,6 @@ updater.dispatcher.add_handler(ConversationHandler(
     fallbacks=[CommandHandler("cancel", cancel_time)]
 ))
 updater.dispatcher.add_handler(CallbackQueryHandler(callback_get))
-#텔레그램 Handler - 날씨
+#텔레그램 Handler - 날씨 /w
 updater.dispatcher.add_handler(CommandHandler('w', weather))
 
