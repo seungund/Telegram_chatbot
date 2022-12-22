@@ -13,7 +13,7 @@ import re
 my_token = "5759838781:AAGWmVF7tWC1C4jwDMVdYfkBZC4SVghMqSQ"
 bot = telegram.Bot(token=my_token)
 id = 5589523389
-bot.sendMessage(chat_id=id, text="나는 대화챗봇입니다.")
+bot.sendMessage(chat_id=id, text="<봇 사용법>\n/dop : 도박을 실행합니다\n/w : 현재 날씨를 보여줍니다\n/tt : 당일 시간표를 불러옵니다\n/meal : 당일 급식메뉴를 불러옵니다\n/ncal : 친구들과 N빵")
 updater = Updater(token=my_token, use_context=True)
 dispatcher = updater.dispatcher
 updater.start_polling()
@@ -592,4 +592,3 @@ updater.dispatcher.add_handler(ConversationHandler(
 updater.dispatcher.add_handler(CallbackQueryHandler(callback_get))
 #텔레그램 Handler - 날씨 /w
 updater.dispatcher.add_handler(CommandHandler('w', weather))
-
